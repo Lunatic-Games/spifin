@@ -10,6 +10,11 @@ const LAND_VELOCITY_THRESHOLD = 50.0
 
 var velocity: Vector2
 
+
+func _ready():
+	add_collision_exception_with($Trajectory/TestObject)
+
+
 func _physics_process(delta):
 	var movement = 0.0
 	velocity.y += GRAVITY
@@ -30,6 +35,8 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -JUMP_FORCE
+		$AnimationPlayer.play("jump")
+	elif not is_on_floor():
 		$AnimationPlayer.play("jump")
 	
 	if movement > 0.0:
