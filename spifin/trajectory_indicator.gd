@@ -13,9 +13,9 @@ func _ready():
 
 
 func _physics_process(_delta):
-	var diff = get_viewport().get_mouse_position() - global_position
+	var diff = get_global_mouse_position() - global_position
 	angle = diff.angle()
-	$Mouse.global_position = get_viewport().get_mouse_position()
+	$Mouse.global_position = get_global_mouse_position()
 	$Mouse.rotation = angle + PI / 2.0
 	
 	var velocity = Vector2(cos(angle), sin(angle)) * speed

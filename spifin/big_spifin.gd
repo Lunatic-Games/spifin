@@ -25,3 +25,9 @@ func throw():
 	$TrajectoryIndicator/TestObject.add_collision_exception_with(smol_spifin)
 	$Camera2D.current = false
 	
+
+func small_spifin_returned():
+	$Stretch/Sprite/SmallSpifin.visible = true
+	$Camera2D.current = true
+	disabled = false
+	$TrajectoryIndicator.visible = true

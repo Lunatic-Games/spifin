@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/art/spifin/small_smifin.png" type="Texture" id=1]
 [ext_resource path="res://spifin/spifin.tscn" type="PackedScene" id=2]
@@ -8,6 +8,82 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4.5 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Stretch/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Stretch/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Stretch:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Stretch:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Stretch/Sprite:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ShardLight:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "eat"
@@ -114,6 +190,71 @@ tracks/7/keys = {
 "values": [ Vector2( 0, -3.27274 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "jump_on"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Stretch/Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -30 ), Vector2( 0, -22 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "jumped_back_on"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera2D:offset")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -30 ), Vector2( 0, -22 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Stretch:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Stretch/Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=5]
 resource_name = "spit_out"
 tracks/0/type = "value"
@@ -141,40 +282,52 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("CollisionShape2D:shape:extents")
+tracks/2/path = NodePath("Stretch/Sprite:self_modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ Vector2( 4, 6.5 ), Vector2( 4, 4.5 ) ]
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.941176 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/path = NodePath("CollisionShape2D:shape:extents")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 0, -6.5 ), Vector2( 0, -4.5 ) ]
+"values": [ Vector2( 4, 4.5 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Stretch/Sprite:self_modulate")
+tracks/4/path = NodePath("CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 0, -4.5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Stretch:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.941176 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -206,7 +359,10 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" parent="." index="2"]
+autoplay = "default"
+anims/default = SubResource( 6 )
 anims/eat = SubResource( 2 )
+anims/jump_on = SubResource( 7 )
 anims/spit_out = SubResource( 5 )
 
 [node name="ThrowCollisionShape" type="CollisionShape2D" parent="." index="4"]
