@@ -3,5 +3,6 @@ extends Control
 
 
 
-func _on_Begin_pressed():
-	get_tree().change_scene("res://level/level.tscn")
+func _input(event):
+	if event.is_action_pressed("jump"):
+		get_tree().change_scene("res://level/level.tscn")

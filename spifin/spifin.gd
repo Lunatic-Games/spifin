@@ -9,10 +9,11 @@ const LAND_VELOCITY_THRESHOLD = 50.0
 
 var velocity: Vector2
 var disabled = false
+var being_thrown = false
 var jump_force = 150.0
 
 func _ready():
-	$Sprite.material = $Sprite.material.duplicate()
+	$Stretch/Sprite.material = $Stretch/Sprite.material.duplicate()
 
 
 func _physics_process(_delta):
@@ -43,7 +44,7 @@ func _physics_process(_delta):
 		velocity.x = lerp(velocity.x, MAX_SPEED, ACCELERATION_WEIGHT)
 	elif movement < 0.0:
 		velocity.x = lerp(velocity.x, -MAX_SPEED, ACCELERATION_WEIGHT)
-	elif not disabled:
+	elif not being_thrown:
 		velocity.x = lerp(velocity.x, 0.0, DECELERATION_WEIGHT)
 	
 	var on_floor_before = is_on_floor()
