@@ -5,4 +5,8 @@ extends Control
 
 func _input(event):
 	if event.is_action_pressed("jump"):
-		get_tree().change_scene("res://level/level.tscn")
+		$AnimationPlayer.play("fade_out")
+
+
+func faded_out():
+	var _ret = get_tree().change_scene("res://level/level.tscn")

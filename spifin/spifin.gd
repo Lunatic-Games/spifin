@@ -5,7 +5,10 @@ const MAX_SPEED = 150.0
 const GRAVITY = 10.0
 const ACCELERATION_WEIGHT = 0.8
 const DECELERATION_WEIGHT = 0.5
-const LAND_VELOCITY_THRESHOLD = 50.0
+
+export (bool) var dummy = false
+export (bool) var sleeping = false
+
 
 var velocity: Vector2
 var disabled = false
@@ -14,9 +17,13 @@ var jump_force = 150.0
 
 func _ready():
 	$Stretch/Sprite.material = $Stretch/Sprite.material.duplicate()
+	if sleeping:
+		go_to_sleep()
 
 
 func _physics_process(_delta):
+	if dummy:
+		return
 	var movement = 0.0
 	velocity.y += GRAVITY
 	
@@ -51,3 +58,11 @@ func _physics_process(_delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	if not on_floor_before and is_on_floor():
 		$AnimationPlayer.play("land")
+
+
+func go_to_sleep():
+	$SleepParticles.emitting = true
+
+
+func wake_up():
+	$SleepParticles.emitting = false

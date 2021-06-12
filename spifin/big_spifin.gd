@@ -1,9 +1,19 @@
 extends "res://spifin/spifin.gd"
 
 const SMALL_SPIFIN = preload("res://spifin/small_spifin.tscn")
+const AWAKE_TEXTURE = preload("res://assets/art/spifin/big_spifin.png")
+const ASLEEP_TEXTURE = preload("res://assets/art/spifin/big_spifin_asleep.png")
+const ASLEEP_SMALL_TEXTURE = preload("res://assets/art/spifin/small_smifin_asleep.png")
+const AWAKE_SMALL_TEXTURE = preload("res://assets/art/spifin/small_smifin.png")
 
 func _ready():
 	add_collision_exception_with($TrajectoryIndicator/TestObject)
+	
+	if dummy:
+		remove_child($TrajectoryIndicator)
+		disabled = true
+	else:
+		$Camera2D.current = true
 
 
 func _input(event):
@@ -31,3 +41,17 @@ func small_spifin_returned():
 	$Camera2D.current = true
 	disabled = false
 	$TrajectoryIndicator.visible = true
+
+
+func go_to_sleep():
+	.go_to_sleep()
+	$Stretch/Sprite.texture = ASLEEP_TEXTURE
+	$Stretch/Sprite/SmallSpifin.texture = ASLEEP_SMALL_TEXTURE
+	$Stretch/Sprite/SmallSpifin/SleepParticles.emitting = true
+
+
+func wake_up():
+	.wake_up()
+	$Stretch/Sprite.texture = AWAKE_TEXTURE
+	$Stretch/Sprite/SmallSpifin.texture = AWAKE_SMALL_TEXTURE
+	$Stretch/Sprite/SmallSpifin/SleepParticles.emitting = false

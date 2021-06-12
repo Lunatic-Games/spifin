@@ -52,6 +52,10 @@ func spit_shard_out(big_spifin):
 	parent_spifin = big_spifin
 
 
+func collect_shard():
+	get_tree().call_group("shard_holder", "shard_collected")
+
+
 func jump_on(big_spifin):
 	disabled = true
 	$AnimationPlayer.play("jump_on")

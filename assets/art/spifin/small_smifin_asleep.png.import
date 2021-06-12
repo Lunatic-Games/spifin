@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torch_light.png-50a771a34486cb9a37335410fa84baf9.stex"
+path="res://.import/small_smifin_asleep.png-981c608fa4cf85b23f37791dc20eddf2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/tiles/torch_light.png"
-dest_files=[ "res://.import/torch_light.png-50a771a34486cb9a37335410fa84baf9.stex" ]
+source_file="res://assets/art/spifin/small_smifin_asleep.png"
+dest_files=[ "res://.import/small_smifin_asleep.png-981c608fa4cf85b23f37791dc20eddf2.stex" ]
 
 [params]
 
