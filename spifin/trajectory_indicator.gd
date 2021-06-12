@@ -12,8 +12,8 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 
-func _physics_process(delta):
-	var diff = get_global_mouse_position() - global_position
+func _physics_process(_delta):
+	var diff = get_viewport().get_mouse_position() - global_position
 	angle = diff.angle()
 	$Mouse.global_position = get_viewport().get_mouse_position()
 	$Mouse.rotation = angle + PI / 2.0
@@ -23,7 +23,7 @@ func _physics_process(delta):
 	$TestObject.position = Vector2(0, 0)
 	add_point($TestObject.position)
 	
-	for i in range(100):
+	for _i in range(100):
 		velocity.y += gravity
 		velocity = $TestObject.move_and_slide(velocity)
 		add_point($TestObject.global_position - global_position)

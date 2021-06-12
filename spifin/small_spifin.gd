@@ -1,20 +1,19 @@
-extends KinematicBody2D
+extends "res://spifin/spifin.gd"
 
 
-const GRAVITY = 10.0
-const SPEED = 400.0
+const THROW_SPEED = 400.0
 
-var velocity: Vector2
+
+func _ready():
+	disabled = true
+	jump_force = 250.0
 
 func throw(angle):
-	velocity = Vector2(cos(angle), sin(angle)) * SPEED
-	$Camera2D.current = true
-
+	velocity = Vector2(cos(angle), sin(angle)) * THROW_SPEED
 
 func _physics_process(delta):
-	velocity.y += GRAVITY
-	velocity = move_and_slide(velocity, Vector2.UP)
 	if is_on_floor():
-		$ThrowCollision.set_deferred("disabled", true)
+		$ThrowCollisionShape.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", false)
 		velocity.x = 0.0
+		disabled = false
