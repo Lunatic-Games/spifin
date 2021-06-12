@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/fonts/TitanOne-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://level/tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://menus/button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://spifin/big_spifin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://menus/main_menu/main_menu.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -299,11 +300,42 @@ tracks/1/keys = {
 
 [sub_resource type="DynamicFont" id=1]
 size = 90
+use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "float"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 38 ), Vector2( 0, 46 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9, 1.5, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, 0.0, -1.0 ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -360,14 +392,20 @@ tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -6
 
 [node name="Title" type="Label" parent="."]
 anchor_right = 1.0
-margin_top = 38.0
-margin_bottom = 113.0
+margin_top = 38.7277
+margin_bottom = 142.728
+rect_rotation = 0.222222
+rect_pivot_offset = Vector2( 320, 52 )
 custom_fonts/font = SubResource( 1 )
 text = "SPIFIN"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title"]
+autoplay = "float"
+anims/float = SubResource( 12 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_top = 0.5
@@ -379,9 +417,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" parent="VBoxContainer" instance=ExtResource( 3 )]
+[node name="Begin" parent="VBoxContainer" instance=ExtResource( 3 )]
 margin_bottom = 42.0
+rect_scale = Vector2( 1, 1 )
 text = "Begin"
+
+[connection signal="pressed" from="VBoxContainer/Begin" to="." method="_on_Begin_pressed"]
 
 [editable path="BigSpifin"]
 [editable path="BigSpifin2"]

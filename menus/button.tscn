@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/TitanOne-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://menus/button.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -8,13 +9,55 @@
 size = 30
 font_data = ExtResource( 1 )
 
+[sub_resource type="Animation" id=3]
+resource_name = "hover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 1.2, 1.1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "unhover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 1, 1 ) ]
+}
+
 [node name="Button" type="Button"]
 margin_right = 640.0
 margin_bottom = 35.0
+rect_scale = Vector2( 1.2, 1.1 )
 custom_styles/focus = SubResource( 2 )
 custom_fonts/font = SubResource( 1 )
-text = "Play"
+action_mode = 0
+text = "Text"
 flat = true
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/hover = SubResource( 3 )
+anims/unhover = SubResource( 4 )
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
