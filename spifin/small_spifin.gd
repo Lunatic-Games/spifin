@@ -8,6 +8,7 @@ var velocity: Vector2
 
 func throw(angle):
 	velocity = Vector2(cos(angle), sin(angle)) * SPEED
+	$Camera2D.current = true
 
 
 func _physics_process(delta):

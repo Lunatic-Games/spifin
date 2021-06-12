@@ -6,7 +6,7 @@
 [ext_resource path="res://spifin/big_spifin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menus/main_menu/main_menu.gd" type="Script" id=5]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "idle"
 length = 2.0
 loop = true
@@ -21,6 +21,34 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1.02 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "jump"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 3,
+"values": [ Vector2( 0.8, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:material:shader_param/amount")
@@ -36,34 +64,6 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "jump"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"update": 3,
-"values": [ Vector2( 0.8, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:material:shader_param/amount")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[sub_resource type="Animation" id=4]
 resource_name = "land"
 length = 0.6
 step = 0.05
@@ -92,7 +92,7 @@ tracks/1/keys = {
 "values": [ 0.1, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "move"
 length = 0.8
 loop = true
@@ -122,7 +122,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "reset_to_idle"
 length = 0.1
 tracks/0/type = "value"
@@ -152,7 +152,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "idle"
 length = 2.0
 loop = true
@@ -181,7 +181,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "jump"
 length = 0.2
 tracks/0/type = "value"
@@ -209,7 +209,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "land"
 length = 0.6
 step = 0.05
@@ -238,7 +238,7 @@ tracks/1/keys = {
 "values": [ 0.1, 0.0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "move"
 length = 0.8
 loop = true
@@ -268,7 +268,7 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "reset_to_idle"
 length = 0.1
 tracks/0/type = "value"
@@ -298,7 +298,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=11]
 size = 90
 use_filter = true
 font_data = ExtResource( 1 )
@@ -354,6 +354,9 @@ script = null
 visible = false
 script = null
 
+[node name="Camera2D" parent="BigSpifin" index="4"]
+current = false
+
 [node name="BigSpifin2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 534, 240 )
 script = null
@@ -363,11 +366,14 @@ visible = false
 script = null
 
 [node name="AnimationPlayer" parent="BigSpifin2" index="3"]
-anims/idle = SubResource( 2 )
-anims/jump = SubResource( 3 )
-anims/land = SubResource( 4 )
-anims/move = SubResource( 5 )
-anims/reset_to_idle = SubResource( 6 )
+anims/idle = SubResource( 1 )
+anims/jump = SubResource( 2 )
+anims/land = SubResource( 3 )
+anims/move = SubResource( 4 )
+anims/reset_to_idle = SubResource( 5 )
+
+[node name="Camera2D" parent="BigSpifin2" index="4"]
+current = false
 
 [node name="BigSpifin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 286, 304 )
@@ -378,11 +384,14 @@ visible = false
 script = null
 
 [node name="AnimationPlayer" parent="BigSpifin3" index="3"]
-anims/idle = SubResource( 7 )
-anims/jump = SubResource( 8 )
-anims/land = SubResource( 9 )
-anims/move = SubResource( 10 )
-anims/reset_to_idle = SubResource( 11 )
+anims/idle = SubResource( 6 )
+anims/jump = SubResource( 7 )
+anims/land = SubResource( 8 )
+anims/move = SubResource( 9 )
+anims/reset_to_idle = SubResource( 10 )
+
+[node name="Camera2D" parent="BigSpifin3" index="4"]
+current = false
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -396,7 +405,7 @@ margin_top = 38.7277
 margin_bottom = 142.728
 rect_rotation = 0.222222
 rect_pivot_offset = Vector2( 320, 52 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 11 )
 text = "SPIFIN"
 align = 1
 __meta__ = {
