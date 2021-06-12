@@ -8,11 +8,18 @@ const ACCELERATION_WEIGHT = 0.8
 const DECELERATION_WEIGHT = 0.5
 const LAND_VELOCITY_THRESHOLD = 50.0
 
+const SMALL_SPIFIN = preload("res://spifin/small_spifin.tscn")
+
 var velocity: Vector2
 
 
 func _ready():
 	add_collision_exception_with($Trajectory/TestObject)
+
+
+func _input(event):
+	if event.is_action_pressed("throw"):
+		throw()
 
 
 func _physics_process(delta):
@@ -52,3 +59,12 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2.UP)
 	if not on_floor_before and is_on_floor():
 		$AnimationPlayer.play("land")
+
+
+func throw():
+	$Sprite/SmallSpifin.visible = false
+	var smol_spifin = SMALL_SPIFIN.instance()
+	smol_spifin.add_collision_exception_with(self)
+	get_parent().add_child(smol_spifin)
+	smol_spifin.global_position = $Sprite/SmallSpifin.global_position
+	smol_spifin.throw($Trajectory.angle)

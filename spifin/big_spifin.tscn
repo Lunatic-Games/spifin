@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/art/spifin/big_spifin.png" type="Texture" id=1]
 [ext_resource path="res://spifin/big_spifin.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/art/spifin/dotted_line.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/spifin/crosshair.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/spifin/mouse.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/spifin/small_smifin.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=8]
 radius = 0.01
@@ -169,7 +170,7 @@ position = Vector2( 288, 272 )
 script = ExtResource( 2 )
 
 [node name="Trajectory" type="Line2D" parent="."]
-position = Vector2( 2, 7 )
+position = Vector2( 2, -6 )
 points = PoolVector2Array( 107, -52, -1, 3 )
 width = 1.5
 default_color = Color( 1, 1, 1, 0.298039 )
@@ -184,7 +185,6 @@ position = Vector2( -1, 3 )
 shape = SubResource( 8 )
 
 [node name="Crosshair" type="Sprite" parent="Trajectory"]
-visible = false
 rotation = 0.785398
 z_index = 1
 texture = ExtResource( 6 )
@@ -199,6 +199,12 @@ position = Vector2( 1, 17 )
 scale = Vector2( 0.8, 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -16 )
+
+[node name="SmallSpifin" type="Sprite" parent="Sprite"]
+show_behind_parent = true
+position = Vector2( 1.25, -25 )
+scale = Vector2( 1.25, 1 )
+texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 5.5 )

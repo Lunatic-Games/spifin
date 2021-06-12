@@ -2,8 +2,9 @@ extends Line2D
 
 
 export (float) var gravity = 10.0
-export (float) var min_velocity = 400.0
-export (float) var max_velocity = 400.0
+export (float) var speed = 400.0
+
+var angle = 0.0
 
 
 func _ready():
@@ -13,16 +14,15 @@ func _ready():
 
 func _physics_process(delta):
 	var diff = get_global_mouse_position() - global_position
-	var ratio = clamp(diff.length() / 100.0, 0.0, 1.0)
-	var speed = (max_velocity - min_velocity) * ratio + min_velocity
-	var rot = diff.angle()
+	angle = diff.angle()
 	$Mouse.global_position = get_viewport().get_mouse_position()
-	$Mouse.rotation = rot + PI / 2.0
+	$Mouse.rotation = angle + PI / 2.0
+	
+	var velocity = Vector2(cos(angle), sin(angle)) * speed
+	clear_points()
 	$TestObject.position = Vector2(0, 0)
 	add_point($TestObject.position)
-	var velocity = Vector2(cos(rot), sin(rot)) * speed
 	
-	clear_points()
 	for i in range(100):
 		velocity.y += gravity
 		velocity = $TestObject.move_and_slide(velocity)
