@@ -10,7 +10,8 @@ func _ready():
 	add_collision_exception_with($TrajectoryIndicator/TestObject)
 	
 	if dummy:
-		remove_child($TrajectoryIndicator)
+		$TrajectoryIndicator.visible = false
+		$TrajectoryIndicator/TestObject/CollisionShape2D.disabled = true
 		disabled = true
 	else:
 		$Camera2D.current = true
@@ -22,6 +23,8 @@ func _input(event):
 
 
 func throw():
+	if not $TrajectoryIndicator.visible:
+		return
 	$AnimationPlayer.play("throw")
 	disabled = true
 	$TrajectoryIndicator.visible = false
@@ -55,3 +58,11 @@ func wake_up():
 	$Stretch/Sprite.texture = AWAKE_TEXTURE
 	$Stretch/Sprite/SmallSpifin.texture = AWAKE_SMALL_TEXTURE
 	$Stretch/Sprite/SmallSpifin/SleepParticles.emitting = false
+	disabled = false
+	dummy = false
+	sleeping = false
+
+
+func allow_throwing():
+	$TrajectoryIndicator.visible = true
+	$TrajectoryIndicator/TestObject/CollisionShape2D.disabled = false
