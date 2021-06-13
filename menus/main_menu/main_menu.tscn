@@ -189,6 +189,18 @@ __meta__ = {
 autoplay = "float"
 anims/float = SubResource( 4 )
 
+[node name="BigSpifin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 287, 304 )
+dummy = true
+
+[node name="BigSpifin2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 534, 240 )
+dummy = true
+
+[node name="BigSpifin3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 118, 256 )
+dummy = true
+
 [node name="Black" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,18 +213,6 @@ __meta__ = {
 autoplay = "fade_in"
 anims/fade_in = SubResource( 5 )
 anims/fade_out = SubResource( 6 )
-
-[node name="BigSpifin" parent="." instance=ExtResource( 4 )]
-position = Vector2( 287, 304 )
-dummy = true
-
-[node name="BigSpifin2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 534, 240 )
-dummy = true
-
-[node name="BigSpifin3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 118, 256 )
-dummy = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

@@ -11,6 +11,8 @@ func shard_collected():
 	n_collected += 1
 	if n_collected == 8:
 		$Label.text = "All shards collected!"
+	elif n_collected == 7:
+		$Label.text = str(8 - n_collected) + " shard remaining"
 	else:
 		$Label.text = str(8 - n_collected) + " shards remaining"
 	$AnimationPlayer.play("display")
