@@ -54,8 +54,9 @@ func _physics_process(_delta):
 	elif not being_thrown:
 		velocity.x = lerp(velocity.x, 0.0, DECELERATION_WEIGHT)
 	
+	var snap = 2.0 * Vector2.DOWN if is_on_floor() else Vector2.ZERO
 	var on_floor_before = is_on_floor()
-	velocity = move_and_slide(velocity, Vector2.UP)
+	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP)
 	if not on_floor_before and is_on_floor():
 		$AnimationPlayer.play("land")
 

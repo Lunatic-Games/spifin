@@ -4,7 +4,6 @@ extends TextureRect
 var n_collected = 0
 
 func shard_collected():
-	visible = true
 	n_collected += 1
 	var shard = get_node("Shard" + str(n_collected))
 	shard.visible = true

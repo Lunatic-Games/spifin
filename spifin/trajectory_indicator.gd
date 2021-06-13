@@ -23,10 +23,12 @@ func _physics_process(_delta):
 	$TestObject.position = Vector2(0, 0)
 	add_point($TestObject.position)
 	
-	for _i in range(100):
+	for _i in range(110):
 		velocity.y += gravity
 		velocity = $TestObject.move_and_slide(velocity)
 		add_point($TestObject.global_position - global_position)
 		if $TestObject.get_slide_count():
 			$Crosshair.global_position = $TestObject.global_position
-			break
+			return
+	$Crosshair.global_position = $TestObject.global_position
+	
