@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/fonts/TitanOne-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://level/tiles.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/music/the_end.wav" type="AudioStream" id=3]
 [ext_resource path="res://spifin/big_spifin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://menus/main_menu/main_menu.gd" type="Script" id=5]
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=1]
 size = 90
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=2]
 resource_name = "float"
 length = 3.0
 loop = true
@@ -39,11 +40,11 @@ tracks/1/keys = {
 "values": [ 0.0, 1.0, 0.0, -1.0 ]
 }
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=4]
 resource_name = "float"
 length = 3.0
 loop = true
@@ -60,7 +61,7 @@ tracks/0/keys = {
 "values": [ Vector2( 189.5, 175 ), Vector2( 189.5, 177 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=5]
 resource_name = "fade_in"
 length = 0.5
 tracks/0/type = "value"
@@ -75,8 +76,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -80.0, -30.0, -20.0 ]
+}
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=6]
 resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Black:color")
@@ -104,6 +117,18 @@ tracks/1/keys = {
 "method": "faded_out"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -20.0, -40.0, -80.0 ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -130,7 +155,7 @@ anchor_right = 1.0
 margin_top = 38.0
 margin_bottom = 142.0
 rect_pivot_offset = Vector2( 320, 52 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 1 )
 text = "SPIFIN"
 align = 1
 __meta__ = {
@@ -139,7 +164,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Title"]
 autoplay = "float"
-anims/float = SubResource( 12 )
+anims/float = SubResource( 2 )
 
 [node name="Label" type="RichTextLabel" parent="."]
 anchor_left = 0.5
@@ -150,7 +175,7 @@ margin_left = -130.5
 margin_top = -5.0
 margin_right = 137.5
 margin_bottom = 24.0
-custom_fonts/normal_font = SubResource( 13 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[rainbow freq=0.1 sat=1 val=1][wave amp=25 freq=2]Press spacebar to begin[/wave][/rainbow]"
 text = "Press spacebar to begin"
@@ -162,21 +187,20 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
 autoplay = "float"
-anims/float = SubResource( 14 )
+anims/float = SubResource( 4 )
 
 [node name="Black" type="ColorRect" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "fade_in"
-anims/fade_in = SubResource( 15 )
-anims/fade_out = SubResource( 16 )
+anims/fade_in = SubResource( 5 )
+anims/fade_out = SubResource( 6 )
 
 [node name="BigSpifin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 287, 304 )
@@ -189,3 +213,8 @@ dummy = true
 [node name="BigSpifin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 118, 256 )
 dummy = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -80.0
+autoplay = true

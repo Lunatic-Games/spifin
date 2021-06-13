@@ -44,6 +44,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not disabled:
 		velocity.y = -jump_force
 		$AnimationPlayer.play("jump")
+		$JumpSFX.play()
 	elif not is_on_floor():
 		$AnimationPlayer.play("jump")
 	
@@ -59,6 +60,7 @@ func _physics_process(_delta):
 	velocity = move_and_slide_with_snap(velocity, snap, Vector2.UP)
 	if not on_floor_before and is_on_floor():
 		$AnimationPlayer.play("land")
+		$HitSFX.play()
 
 
 func go_to_sleep():

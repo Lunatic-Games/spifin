@@ -26,6 +26,7 @@ func throw():
 	if not $TrajectoryIndicator.visible:
 		return
 	$AnimationPlayer.play("throw")
+	$ThrowSFX.play()
 	disabled = true
 	$TrajectoryIndicator.visible = false
 	$Stretch/Sprite/SmallSpifin.visible = false
@@ -44,6 +45,7 @@ func small_spifin_returned():
 	$Camera2D.current = true
 	disabled = false
 	$TrajectoryIndicator.visible = true
+	$ReturnSFX.play()
 
 
 func go_to_sleep():
@@ -63,6 +65,15 @@ func wake_up():
 	sleeping = false
 
 
-func allow_throwing():
+func allow_throwing(body):
+	if body != self:
+		return
 	$TrajectoryIndicator.visible = true
-	$TrajectoryIndicator/TestObject/CollisionShape2D.disabled = false
+	$TrajectoryIndicator/TestObject/CollisionShape2D.set_deferred("disabled", false)
+
+
+func disable_throwing(body):
+	if body != self:
+		return
+	$TrajectoryIndicator.visible = false
+	$TrajectoryIndicator/TestObject/CollisionShape2D.set_deferred("disabled", true)

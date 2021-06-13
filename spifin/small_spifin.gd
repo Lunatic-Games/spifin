@@ -53,7 +53,7 @@ func spit_shard_out(big_spifin):
 
 
 func collect_shard():
-	get_tree().call_group("shard_holder", "shard_collected")
+	get_tree().call_group("shard_manager", "shard_collected")
 
 
 func jump_on(big_spifin):
