@@ -50,6 +50,14 @@ func spit_shard_out(big_spifin):
 	$AnimationPlayer.queue("jump_on")
 	held_shard = null
 	parent_spifin = big_spifin
+	
+	yield(get_tree().create_timer(1.2), "timeout")
+	var current_pos = $Stretch/Sprite.global_position
+	$Tween.interpolate_property($Stretch/Sprite, "global_position", current_pos, 
+		big_spifin.global_position + Vector2(0, -20), 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Stretch/Sprite, "global_position", big_spifin.global_position + Vector2(0, -20), 
+		big_spifin.global_position + Vector2(0, -5), 0.2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 0.3)
+	$Tween.start()
 
 
 func collect_shard():
@@ -58,8 +66,15 @@ func collect_shard():
 
 func jump_on(big_spifin):
 	disabled = true
-	$AnimationPlayer.play("jump_on")
 	parent_spifin = big_spifin
+	$AnimationPlayer.play("jump_on")
+
+	var current_pos = $Stretch/Sprite.global_position
+	$Tween.interpolate_property($Stretch/Sprite, "global_position", current_pos, 
+		big_spifin.global_position + Vector2(0, -20), 0.3, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT)
+	$Tween.interpolate_property($Stretch/Sprite, "global_position", big_spifin.global_position + Vector2(0, -20), 
+		big_spifin.global_position + Vector2(0, -5), 0.2, Tween.TRANS_CUBIC, Tween.EASE_IN_OUT, 0.3)
+	$Tween.start()
 
 
 func jumped_back_on():
@@ -73,3 +88,11 @@ func chomp_shard():
 
 func done_eating():
 	disabled = false
+
+
+func pause():
+	get_tree().paused = true
+
+
+func unpause():
+	get_tree().paused = false

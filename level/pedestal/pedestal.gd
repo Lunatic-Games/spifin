@@ -2,6 +2,9 @@ extends Sprite
 
 
 func begin(player):
+	if not player.is_in_group("big_spifin"):
+		return
+	
 	player.disabled = true
 	for shard in $Spin.get_children():
 		shard.come_down()

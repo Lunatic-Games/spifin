@@ -33,7 +33,7 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 10 )
+extents = Vector2( 13, 10 )
 
 [node name="BigSpifin" groups=[
 "big_spifin",

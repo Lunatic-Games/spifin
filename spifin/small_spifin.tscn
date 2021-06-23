@@ -247,7 +247,7 @@ tracks/0/path = NodePath("Stretch/Sprite:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
@@ -303,6 +303,23 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "pause"
+}, {
+"args": [  ],
+"method": "unpause"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -454,6 +471,20 @@ tracks/11/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/12/type = "method"
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "pause"
+} ]
+}
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 0, 0 )
@@ -468,13 +499,16 @@ script = ExtResource( 3 )
 position = Vector2( 0, 0 )
 
 [node name="Sprite" parent="Stretch" index="0"]
-self_modulate = Color( 1, 1, 1, 0.941176 )
+self_modulate = Color( 1, 1, 1, 0.990196 )
 position = Vector2( 0, 0 )
-scale = Vector2( 1.5, 3.5 )
+scale = Vector2( 1.5, 1.9 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -5 )
 
-[node name="Shard" type="Sprite" parent="Stretch/Sprite" index="0"]
+[node name="Camera2D" type="Camera2D" parent="Stretch/Sprite" index="0"]
+current = true
+
+[node name="Shard" type="Sprite" parent="Stretch/Sprite" index="1"]
 show_behind_parent = true
 position = Vector2( 0, -3.27274 )
 scale = Vector2( 0.4, 0.4 )
@@ -486,11 +520,16 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" parent="." index="2"]
+pause_mode = 2
 autoplay = "default"
 anims/default = SubResource( 2 )
 anims/eat = SubResource( 3 )
 anims/jump_on = SubResource( 4 )
 anims/spit_out = SubResource( 5 )
+
+[node name="Camera2D" parent="." index="3"]
+offset = Vector2( 0, -22 )
+current = false
 
 [node name="ThrowCollisionShape" type="CollisionShape2D" parent="." index="4"]
 shape = SubResource( 6 )
@@ -508,8 +547,8 @@ texture_scale = 4.0
 color = Color( 0.976471, 0.639216, 0.105882, 1 )
 
 [node name="DisplayShard" parent="." index="7" instance=ExtResource( 6 )]
-modulate = Color( 1, 1, 1, 1 )
-position = Vector2( 14, -6 )
+position = Vector2( 0, -6 )
+scale = Vector2( 0.7, 0.7 )
 
 [node name="CollisionShape2D" parent="DisplayShard" index="1"]
 disabled = true
@@ -521,6 +560,7 @@ pitch_scale = 1.0
 pitch_scale = 1.0
 
 [node name="ShardSFX" type="AudioStreamPlayer" parent="." index="11"]
+pause_mode = 2
 stream = ExtResource( 8 )
 volume_db = -20.0
 
@@ -528,5 +568,8 @@ volume_db = -20.0
 stream = ExtResource( 7 )
 volume_db = -20.0
 pitch_scale = 0.7
+
+[node name="Tween" type="Tween" parent="." index="13"]
+pause_mode = 2
 
 [editable path="DisplayShard"]
